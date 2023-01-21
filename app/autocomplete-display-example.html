@@ -1,0 +1,50 @@
+<div class="example-form">
+  <form>
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Assignee"
+        aria-label="Assignee"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto2"
+      />
+      <mat-autocomplete
+        #auto2="matAutocomplete"
+        [displayWith]="displayFn"
+        (optionSelected)="updateSelectedOption($event)"
+      >
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <p>@Output() optionSelected EventEmitter</p>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Assignee"
+        aria-label="Assignee"
+        matInput
+        [formControl]="myControlsTwo"
+        [matAutocomplete]="auto3"
+        [disabled]="OtherUserOptions.length === 0"
+      />
+      <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let option of filtredOther | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <p>Is option selected :: {{selectedOption}}</p>
+</div>
